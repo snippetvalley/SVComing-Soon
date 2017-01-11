@@ -1,28 +1,41 @@
-$(document).ready(function(){
-	var dteNow = new Date();
-	var intYear = dteNow.getFullYear();
-	 
+$(function(){
+    $(".icons_block a").click(function(e){
+        e.preventDefault();
+        $(".icons_block a").removeClass('active');
+        var blockId = $(this).attr('id');
+        $(".content-block").removeClass('active');
+        $("."+blockId).addClass('active');
+        $(this).addClass('active');
 
-      $('#counter-block').countdown('2018/01/01', function(event) {
-        var $this = $(this).html(event.strftime(''
-    /*+ '<span>%w <em>weeks </em></span> '*/
-    + '<span>%D <em>days </em></span> '
-    + '<span>%H <em>hrs </em></span> '
-    + '<span>%M <em>mins</em></span>  '
-    + '<span>%S <em>secs</em></span> '));
-      });
-    /* Setting Code */ 
-	$('[data-toggle="popover"]').popover({
-			placement : 'right',
-			trigger : 'click',
-			html : true,
-			title:'Change Image',
-			content : $("#setting-content").html()
-		});
-		$("body").on("click",".width50 .img-responsive",function(){
-			var bgSrc = $(this).attr('src');
-			bgSrc = bgSrc.replace("_tn","").replace("thumbnails","bg");
-			$("html").css('background-image', 'url(' + bgSrc + ')');
-	});
-	/* End of Setting Code */ 
+    });
+    $('a[data-toggle="tooltip"]').tooltip({placement: 'top',trigger:"hover"});
+    setKnobSetting();
+
+
+    $('.FlowupLabels').FlowupLabels({
+    /*
+     * These are all the default values
+     * You may exclude any/all of these options
+     * if you won't be changing them
+     */
+    
+    // Handles the possibility of having input boxes prefilled on page load
+    feature_onInitLoad: true, 
+    
+    // Class when focusing an input
+    class_focused:    'focused',
+    // Class when an input has text entered
+    class_populated:  'populated' 
+  });
+
+
 });
+function setKnobSetting(){
+  var bgColor = $("body .hello-badge").css('backgroundColor');
+   $(".knob-progressbar").knob(
+      {
+        readOnly: true,
+        fgColor: bgColor
+        
+      });
+}
